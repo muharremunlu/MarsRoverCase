@@ -1,0 +1,6 @@
+F:\GitHub\MarsRoverCase\MarsRover\bin\Debug\netcoreapp3.1\MarsRover.exe
+F:\GitHub\MarsRoverCase\MarsRover\obj\Debug\netcoreapp3.1\MarsRover.csprojAssemblyReference.cache
+F:\GitHub\MarsRoverCase\MarsRover\obj\Debug\netcoreapp3.1\MarsRover.AssemblyInfoInputs.cache
+F:\GitHub\MarsRoverCase\MarsRover\obj\Debug\netcoreapp3.1\MarsRover.AssemblyInfo.cs
+F:\GitHub\MarsRoverCase\MarsRover\obj\Debug\netcoreapp3.1\MarsRover.dll
+F:\GitHub\MarsRoverCase\MarsRover\obj\Debug\netcoreapp3.1\MarsRover.pdb

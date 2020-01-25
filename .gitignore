@@ -4,3 +4,5 @@
 
 /.vs
 /MarsRover.MSTest/obj
+/MarsRover/bin
+/MarsRover/obj
