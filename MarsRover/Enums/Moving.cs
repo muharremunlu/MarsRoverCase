@@ -1,17 +1,20 @@
 ﻿namespace MarsRover.Enums
 {
+    /// <summary>
+    /// Rover's movements 
+    /// </summary>
     public enum Moving
     {
         /// <summary>
-        /// Moving Left
+        /// Turning Left
         /// </summary>
         L,
         /// <summary>
-        /// Moving Right
+        /// Turning Right
         /// </summary>
         R,
         /// <summary>
-        /// Moveng forward
+        /// Going Forward
         /// </summary>
         M
     }

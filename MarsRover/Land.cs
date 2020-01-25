@@ -3,7 +3,7 @@
 namespace MarsRover
 {
     /// <summary>
-    /// The Planet
+    /// The Planet's surface
     /// </summary>
     public class Land : ILand
     {
