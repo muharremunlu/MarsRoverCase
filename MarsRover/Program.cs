@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MarsRover
 {
@@ -7,27 +8,35 @@ namespace MarsRover
     {
         static void Main()
         {
-            string landSize = Console.ReadLine();
-            ILand land = new Land(landSize);
-            int roverCount = 2;
-            string roverCoordinate, instructions;
-            List<IRover> rovers = new List<IRover>();
-            while (rovers.Count < roverCount)
-            {
-                roverCoordinate = Console.ReadLine();
-                instructions = Console.ReadLine();
+            StringBuilder commandBuilder = new StringBuilder();
+            commandBuilder.AppendLine("5 5");
+            commandBuilder.AppendLine("1 2 N");
+            commandBuilder.AppendLine("LMLMLMLMM");
+            commandBuilder.AppendLine("3 3 E");
+            commandBuilder.AppendLine("MMRMMRMRRM");
+            string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-                IRover rover = new Rover(land, roverCoordinate);
+            ShowCommandList(commandList);
 
-                rover.RePosition(instructions);
-                rovers.Add(rover);
-            }
+            var rovers = CommandExecuter.Command.Execute(commandList);
 
-            Console.WriteLine("Output:");
-            for (int i = 0; i < rovers.Count; i++)
-                Console.WriteLine(rovers[i].GetLocationInfo());
+            ShowRoversLocations(rovers);
 
             Console.ReadLine();
+        }
+
+        private static void ShowRoversLocations(List<IRover> rovers)
+        {
+            Console.WriteLine("Outputs:");
+            for (int i = 0; i < rovers.Count; i++)
+                Console.WriteLine(rovers[i].GetLocationInfo());
+        }
+
+        private static void ShowCommandList(string[] commandList)
+        {
+            Console.WriteLine("Inputs:");
+            for (int i = 0; i < commandList.Length; i++)
+                Console.WriteLine(commandList[i]);
         }
     }
 }

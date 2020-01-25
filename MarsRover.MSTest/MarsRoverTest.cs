@@ -1,3 +1,4 @@
+using MarsRover.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Internal;
 using System;
@@ -19,17 +20,12 @@ namespace MarsRover.MSTest
             commandBuilder.AppendLine("MMRMMRMRRM");
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
-            
-            ILand land = new Land(commandList[0]);
 
-            IRover rover = new Rover(land, commandList[1]);
-            rover.RePosition(commandList[2]);
+            var rovers = CommandExecuter.Command.Execute(commandList);
 
-            IRover rover2 = new Rover(land, commandList[3]);
-            rover2.RePosition(commandList[4]);
 
-            Assert.AreEqual("1 3 N", rover.GetLocationInfo());
-            Assert.AreEqual("5 1 E", rover2.GetLocationInfo());
+            Assert.AreEqual("1 3 N", rovers[0].GetLocationInfo());
+            Assert.AreEqual("5 1 E", rovers[1].GetLocationInfo());
         }
 
         [TestMethod]
@@ -43,18 +39,14 @@ namespace MarsRover.MSTest
             commandBuilder.AppendLine("MMRMMRMRRM");
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
-
-            ILand land = new Land(commandList[0]);
-
-            IRover rover = new Rover(land, commandList[1]);
-            rover.RePosition(commandList[2]);
-
-            IRover rover2 = new Rover(land, commandList[3]);
-            rover2.RePosition(commandList[4]);
-
-            Assert.AreEqual("1 3 N", rover.GetLocationInfo());
-            Assert.AreEqual(false, rover2.IsLanded);
-            Assert.AreEqual("The Rover couldn't be landed.", rover2.GetLocationInfo());
+            try
+            {
+                var rovers = CommandExecuter.Command.Execute(commandList);
+            }
+            catch (LandingException ex)
+            {
+                Assert.AreEqual(typeof(LandingException), ex.GetType());
+            }
         }
 
         [TestMethod]
@@ -69,34 +61,14 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-            ILand land = new Land(commandList[0]);
-            IRover rover = null;
-
             try
             {
-                rover = new Rover(land, commandList[1]);
-                rover.RePosition(commandList[2]);
+                var rovers = CommandExecuter.Command.Execute(commandList);
             }
             catch (Exception ex)
             {
-                Assert.AreEqual(typeof(Exceptions.CommandException), ex.GetType());
+                Assert.AreEqual(typeof(LandingException), ex.GetType());
             }
-
-            IRover rover2 = null;
-            try
-            {
-                rover2 = new Rover(land, commandList[3]);
-                rover2.RePosition(commandList[4]);
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(typeof(Exceptions.CommandException), ex.GetType());
-            }
-
-            Assert.AreEqual(false, rover.IsLanded);
-            Assert.AreEqual("The Rover couldn't be landed.", rover.GetLocationInfo());
-            Assert.AreEqual(false, rover2.IsLanded);
-            Assert.AreEqual("The Rover couldn't be landed.", rover2.GetLocationInfo());
         }
 
         [TestMethod]
@@ -111,16 +83,13 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-            ILand land = new Land(commandList[0]);
-            IRover rover = new Rover(land, commandList[1]);
-
             try
             {
-                rover.RePosition(commandList[2]);
+                var rovers = CommandExecuter.Command.Execute(commandList);
             }
             catch (Exception ex)
             {
-                Assert.AreEqual(typeof(Exceptions.CommandException), ex.GetType());
+                Assert.AreEqual(typeof(InstructionException), ex.GetType());
             }
         }
     }

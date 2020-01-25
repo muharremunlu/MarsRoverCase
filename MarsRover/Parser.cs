@@ -1,6 +1,5 @@
 ﻿using MarsRover.Enums;
 using MarsRover.Exceptions;
-using System;
 using System.Text.RegularExpressions;
 
 namespace MarsRover

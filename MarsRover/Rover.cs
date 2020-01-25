@@ -1,4 +1,5 @@
 ﻿using MarsRover.Enums;
+using MarsRover.Exceptions;
 using System;
 
 namespace MarsRover
@@ -35,7 +36,7 @@ namespace MarsRover
             }
             else
             {
-                throw new Exceptions.CommandException($"{instructions} is wrong command. The command only contains L,R,M characters!");
+                throw new Exceptions.InstructionException($"{instructions} is wrong command. The command only contains L,R,M characters!");
             }
         }
 
@@ -139,17 +140,14 @@ namespace MarsRover
             {
                 var location = new Position(coordinate);
                 var compassDirection = coordinate.Split(Separator)[2];
-                try
-                {
-                    Direction = (CompassDirection)Enum.Parse(typeof(CompassDirection), compassDirection);
-                }
-                catch (Exception)
-                {
-                    throw new Exceptions.MovementException($"Wrong Direction:{compassDirection}");
-                }
+
+                Direction = (CompassDirection)Enum.Parse(typeof(CompassDirection), compassDirection);
+
                 IsLanded = Land.SetRoverLocation(location);
                 if (IsLanded)
                     Location = location;
+                else
+                    throw new LandingException("The Rover can't land this coordinate!");
             }
         }
     }
