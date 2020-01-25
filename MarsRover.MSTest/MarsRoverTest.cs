@@ -20,12 +20,12 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
             
-            Land land = new Land(commandList[0]);
+            ILand land = new Land(commandList[0]);
 
-            Rover rover = new Rover(land, commandList[1]);
+            IRover rover = new Rover(land, commandList[1]);
             rover.RePosition(commandList[2]);
 
-            Rover rover2 = new Rover(land, commandList[3]);
+            IRover rover2 = new Rover(land, commandList[3]);
             rover2.RePosition(commandList[4]);
 
             Assert.AreEqual("1 3 N", rover.GetLocationInfo());
@@ -44,12 +44,12 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-            Land land = new Land(commandList[0]);
+            ILand land = new Land(commandList[0]);
 
-            Rover rover = new Rover(land, commandList[1]);
+            IRover rover = new Rover(land, commandList[1]);
             rover.RePosition(commandList[2]);
 
-            Rover rover2 = new Rover(land, commandList[3]);
+            IRover rover2 = new Rover(land, commandList[3]);
             rover2.RePosition(commandList[4]);
 
             Assert.AreEqual("1 3 N", rover.GetLocationInfo());
@@ -69,8 +69,8 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-            Land land = new Land(commandList[0]);
-            Rover rover = null;
+            ILand land = new Land(commandList[0]);
+            IRover rover = null;
 
             try
             {
@@ -82,7 +82,7 @@ namespace MarsRover.MSTest
                 Assert.AreEqual(typeof(Exceptions.CommandException), ex.GetType());
             }
 
-            Rover rover2 = null;
+            IRover rover2 = null;
             try
             {
                 rover2 = new Rover(land, commandList[3]);
@@ -111,8 +111,8 @@ namespace MarsRover.MSTest
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
 
-            Land land = new Land(commandList[0]);
-            Rover rover = new Rover(land, commandList[1]);
+            ILand land = new Land(commandList[0]);
+            IRover rover = new Rover(land, commandList[1]);
 
             try
             {
