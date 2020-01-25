@@ -19,7 +19,7 @@ namespace MarsRover.MSTest
             commandBuilder.AppendLine("MMRMMRMRRM");
 
             string[] commandList = commandBuilder.ToString().Split(Environment.NewLine);
-
+            
             Land land = new Land(commandList[0]);
 
             Rover rover = new Rover(land, commandList[1]);
