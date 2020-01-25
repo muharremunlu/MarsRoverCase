@@ -6,7 +6,6 @@ namespace MarsRover
 {
     public class Rover : IRover
     {
-        private const char Separator = ' ';
         public bool IsLanded { get; set; }
         private ILand Land { get; }
         private Position Location { get; set; }
@@ -30,7 +29,7 @@ namespace MarsRover
                 Moving moving;
                 for (int i = 0; i < instructions.Length && IsLanded; i++)
                 {
-                    moving = GetMovement(instructions, i);
+                    moving = Parser.GetMovement(instructions, i);
                     Move(moving);
                 }
             }
@@ -121,17 +120,6 @@ namespace MarsRover
                 return "The Rover couldn't be landed.";
         }
 
-        private static Moving GetMovement(string instructions, int i)
-        {
-            try
-            {
-                return (Moving)Enum.Parse(typeof(Moving), instructions[i].ToString());
-            }
-            catch (Exception)
-            {
-                throw new Exceptions.MovementException($"Wrong Instruction:{instructions[i].ToString()}");
-            }
-        }
 
         private void SetLocation(string coordinate)
         {
@@ -139,9 +127,7 @@ namespace MarsRover
             if (commantType == CommandType.RoverCoordinate)
             {
                 var location = new Position(coordinate);
-                var compassDirection = coordinate.Split(Separator)[2];
-
-                Direction = (CompassDirection)Enum.Parse(typeof(CompassDirection), compassDirection);
+                Direction=Parser.GetDirection(coordinate);
 
                 IsLanded = Land.SetRoverLocation(location);
                 if (IsLanded)
@@ -150,5 +136,6 @@ namespace MarsRover
                     throw new LandingException("The Rover can't land this coordinate!");
             }
         }
+
     }
 }

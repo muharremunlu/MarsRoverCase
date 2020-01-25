@@ -1,5 +1,6 @@
 ﻿using MarsRover.Enums;
 using MarsRover.Exceptions;
+using System;
 using System.Text.RegularExpressions;
 
 namespace MarsRover
@@ -34,6 +35,26 @@ namespace MarsRover
                 Height = byte.Parse(size.Split(Separator)[1])
             };
             return landSize;
+        }
+
+        internal static CompassDirection GetDirection(string coordinate)
+        {
+            var compassDirection = coordinate.Split(Separator)[2];
+
+            var Direction = (CompassDirection)Enum.Parse(typeof(CompassDirection), compassDirection);
+            return Direction;
+        }
+
+        internal static Moving GetMovement(string instructions, int i)
+        {
+            try
+            {
+                return (Moving)Enum.Parse(typeof(Moving), instructions[i].ToString());
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.MovementException($"Wrong Instruction:{instructions[i].ToString()}");
+            }
         }
     }
 }
