@@ -24,7 +24,7 @@ namespace MarsRover
         public void RePosition(string instructions)
         {
             var commantType = Parser.GetTypeOfCommand(instructions);
-            if (commantType==CommandType.Instructions)
+            if (commantType == CommandType.Instructions)
             {
                 Moving moving;
                 for (int i = 0; i < instructions.Length && IsLanded; i++)
@@ -39,7 +39,7 @@ namespace MarsRover
             }
         }
 
-        public void Move(Moving moving)
+        private void Move(Moving moving)
         {
             switch (moving)
             {
