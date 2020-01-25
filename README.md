@@ -21,6 +21,7 @@ The position is made up of two integers and a letter separated by spaces, corres
 and y co-ordinates and the rover's orientation.
 Each rover will be finished sequentially, which means that the second rover won't start to move
 until the first one has finished moving.
+
 Output:
 The output for each rover should be its final co-ordinates and heading.
 Input and Output
@@ -30,6 +31,7 @@ Test Input:
 LMLMLMLMM
 3 3 E
 MMRMMRMRRM
+
 Expected Output:
 1 3 N
 5 1 E
